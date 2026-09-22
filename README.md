@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/arx-icon-mark.svg" width="120" alt="Arx OS logo">
+</p>
+
 # Arx Painel
 
 Painel web de administração do **Arx OS** — distribuição Linux baseada em Debian, focada em segurança e privacidade, para uso acadêmico e empresarial.
