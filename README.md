@@ -6,7 +6,7 @@
 
 Painel web de administração do **Arx OS** — distribuição Linux baseada em Debian, focada em segurança e privacidade, para uso acadêmico e empresarial.
 
-Versão atual: **0.36.0**
+Versão atual: **0.36.1**
 
 ## O que é
 
@@ -22,7 +22,7 @@ Interface web completa para administrar um servidor Arx OS: rede, firewall, DNS,
 - **Atualizações** — streaming ao vivo, isolamento via `systemd-run`
 - **Backup e restauração**
 - **Alertas e notificações** (e-mail / webhook)
-- **API REST** (token Bearer, reaproveita todas as ações do painel)
+- **API por token** (Bearer, reaproveita todas as ações do painel, com streaming de eventos em tempo real para integrações externas)
 - **Segurança**: RBAC (admin/leitura), MFA (TOTP), WebAuthn (chave física/biometria), AppArmor em modo enforce
 - **Diagnóstico, saúde do sistema, auditoria, jobs assíncronos, modo manutenção**
 
@@ -45,6 +45,20 @@ sudo apt install arx-painel
 
 > O repositório público ainda está em preparação. Enquanto isso, builds `.deb` podem ser solicitados diretamente.
 
+## Primeiro acesso
+
+A instalação não cria nenhum administrador sozinha — o primeiro precisa ser criado manualmente:
+
+```bash
+sudo /opt/painel/webui/venv/bin/python /opt/painel/webui/criar_admin.py admin
+```
+
+Depois disso, acesse `https://<ip-ou-hostname-do-servidor>:9006` (o painel usa certificado autoassinado por padrão — o navegador vai pedir para você aceitar o aviso na primeira vez).
+
+## Integrações
+
+A API por token permite construir ferramentas externas sobre o painel. O **Arx Sentinela** é um app companion (Flutter — Android, iOS, desktop) em desenvolvimento, que recebe status e alertas do painel em tempo real via streaming (SSE), sem depender de serviços de terceiros como FCM.
+
 ## Status do roadmap (Fase 5 — Robustez e Segurança)
 
 - [x] RBAC v1
@@ -54,7 +68,7 @@ sudo apt install arx-painel
 - [x] API completa
 - [ ] Plugins *(adiado conscientemente para pós-1.0)*
 
-Roadmap detalhado em `docs/Arx_Painel_Roadmap_Robustez_Seguranca_Profissional.md`.
+Roadmap detalhado em [`arx-os/docs/`](https://github.com/arxos-project/arx-os/blob/main/docs/arx-painel-roadmap.md).
 
 ## Arquitetura
 
